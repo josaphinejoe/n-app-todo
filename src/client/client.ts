@@ -12,6 +12,11 @@ import { given } from "@nivinjoseph/n-defensive";
 import { MockTodoService } from "../sdk/services/todo-service/mock-todo-service";
 import { components } from "./components/components";
 
+
+/// dev extreme 
+import "./3rd-party/lib/dev-extreme/css/dx.common.css";
+import "./3rd-party/lib/dev-extreme/css/dx.material.custom-scheme.css";
+
 console.log(Vue);
 
 

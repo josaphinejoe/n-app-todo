@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "key": "$base-accent",
+            "value": "rgba(248, 171, 58, 1)"
+        },
+        {
+            "key": "$base-border-color",
+            "value": "rgba(229, 229, 229, 1)"
+        },
+        {
+            "key": "$base-border-radius",
+            "value": "6px"
+        },
+        {
+            "key": "$datagrid-columnchooser-font-weight",
+            "value": "700"
+        },
+        {
+            "key": "$datagrid-menu-icon-color",
+            "value": "rgba(127, 127, 127, 1)"
+        },
+        {
+            "key": "$datagrid-drag-header-border-color",
+            "value": "rgba(248, 171, 58, 1)"
+        },
+        {
+            "key": "$datagrid-columnchooser-item-color",
+            "value": "rgba(34, 34, 34, 0.8)"
+        },
+        {
+            "key": "$datagrid-group-row-color",
+            "value": "rgba(34, 34, 34, 0.8)"
+        },
+        {
+            "key": "$datagrid-summary-color",
+            "value": "rgba(34, 34, 34, 0.8)"
+        },
+        {
+            "key": "$datagrid-group-row-bg",
+            "value": "rgba(248, 248, 248, 1)"
+        }
+    ],
+    "baseTheme": "material.blue.light",
+    "outputColorScheme": "custom-scheme",
+    "makeSwatch": false,
+    "version": "20.2.5",
+    "widgets": []
+}
