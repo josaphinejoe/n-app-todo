@@ -5,7 +5,7 @@ export class Routes
     public static paxList = "/paxList";
     public static managePax = "/managePax?{id?: string}";
 
-
+    public static fileSystem = "/fileSystem";
     /**
      * static
      */
