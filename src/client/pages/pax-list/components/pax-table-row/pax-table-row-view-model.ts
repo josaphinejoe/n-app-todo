@@ -8,10 +8,12 @@ import "./pax-table-row-view.scss";
 @template(require("./pax-table-row-view.html"))
 @element("pax-table-row")
 @events("managePax", "deletePax")
-@bind("selectablePax")
+@bind({
+    selectablePax: "object"
+})
 export class PaxTableRowViewModel extends ComponentViewModel
 {
-    private get _selectablePax(): SelectablePax { return this.getBound("selectablePax"); }
+    private get _selectablePax(): SelectablePax { return this.getBound<SelectablePax>("selectablePax"); }
 
 
     public get pax(): Pax { return this._selectablePax.pax; }

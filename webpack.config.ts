@@ -1,10 +1,12 @@
-const path = require("path");
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import "@nivinjoseph/n-ext";
+import * as Path from "path";
 const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 import { ConfigurationManager } from "@nivinjoseph/n-config";
 const webpack = require("webpack");
@@ -24,16 +26,16 @@ const tsLoader = {
     }
 };
 
-const tsLintLoader = {
-    loader: "tslint-loader",
-    options: {
-        configFile: "tslint.json",
-        tsConfigFile: "tsconfig.client.json",
-        // typeCheck: true, // this is a performance hog
-        typeCheck: !isDev,
-        emitErrors: true
-    }
-};
+// const tsLintLoader = {
+//     loader: "tslint-loader",
+//     options: {
+//         configFile: "tslint.json",
+//         tsConfigFile: "tsconfig.client.json",
+//         // typeCheck: true, // this is a performance hog
+//         typeCheck: !isDev,
+//         emitErrors: true
+//     }
+// };
 
 const moduleRules: Array<any> = [
     {
@@ -46,7 +48,10 @@ const moduleRules: Array<any> = [
                 }
             },
             {
-                loader: "css-loader" // translates CSS into CommonJS
+                loader: "css-loader", // translates CSS into CommonJS
+                options: {
+                    esModule: false
+                }
             },
             {
                 loader: "postcss-loader", // postcss
@@ -80,7 +85,10 @@ const moduleRules: Array<any> = [
                 }
             },
             {
-                loader: "css-loader" // translates CSS into CommonJS
+                loader: "css-loader", // translates CSS into CommonJS
+                options: {
+                    esModule: false
+                }
             }
         ]
     },
@@ -93,8 +101,8 @@ const moduleRules: Array<any> = [
                     limit: 9000,
                     fallback: "file-loader",
                     esModule: false,
-                    // @ts-ignore
-                    name: (resourcePath: string, resourceQuery: string) =>
+
+                    name: (_resourcePath: string, _resourceQuery: string): string =>
                     {
                         // `resourcePath` - `/absolute/path/to/file.js`
                         // `resourceQuery` - `?foo=bar`
@@ -148,23 +156,40 @@ const moduleRules: Array<any> = [
         exclude: /node_modules/,
         use: [tsLoader]
     },
+    // {
+    //     test: /\.ts$/,
+    //     exclude: /node_modules/,
+    //     enforce: "pre",
+    //     use: [tsLintLoader]
+    // },
     {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        enforce: "pre",
-        use: [tsLintLoader]
+        test: /-resolver\.ts$/,
+        use: [
+            { loader: "@nivinjoseph/n-app/dist/loaders/resolver-loader.js" },
+            tsLoader
+        ]
     },
     {
         test: /-view-model\.ts$/,
         use: [
-            { loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js" },
+            {
+                loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js",
+                options: {
+                    hmrView: "renderFuncs" // templates | renderFuncs
+                }
+            },
             tsLoader
         ]
     },
     {
         test: /-view-model\.js$/,
         use: [
-            { loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js" }
+            {
+                loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js",
+                options: {
+                    hmrView: "renderFuncs" // templates | renderFuncs
+                }
+            }
         ]
     },
     {
@@ -173,7 +198,9 @@ const moduleRules: Array<any> = [
             {
                 loader: "worker-loader",
                 options: {
-                    esModule: false
+                    esModule: false,
+                    filename: "[name].[contenthash].worker.js",
+                    chunkFilename: "[id].[contenthash].worker.js"
                 }
             },
             tsLoader
@@ -181,31 +208,43 @@ const moduleRules: Array<any> = [
     },
     {
         test: /-view\.html$/,
-        exclude: [path.resolve(__dirname, "src/server")],
+        exclude: [Path.resolve(__dirname, "src/server")],
         use: [
-            ...(isDev ? [] :
-                [{
-                    loader: "vue-loader/lib/loaders/templateLoader.js"
-                },
-                {
-                    loader: "@nivinjoseph/n-app/dist/loaders/view-loader.js"
-                }]),
+            {
+                loader: "@nivinjoseph/n-app/dist/loaders/view-ts-check-loader.js"
+                // options: {
+                //     debug: true,
+                //     debugFiles: [
+                //         // Path.resolve("src/client/pages/core/pages/projects/projects-view-model.ts")
+                //         // Path.resolve("src/client/pages/settings/manage-org-users/manage-org-users-view-model.ts")
+                //         Path.resolve("src/client/pages/core/pages/project/components/project-instagram-user-posts/project-instagram-user-posts-view-model.ts"),
+                //         Path.resolve("src/client/pages/core/pages/asset/asset-view-model.ts"),
+                //         Path.resolve("src/client/pages/core/pages/facebook-sandbox/components/facebook-sandbox-story-profiles/facebook-sandbox-story-profiles-view-model.ts")
+                //     ]
+                // }
+            },
+            {
+                loader: "vue-loader/lib/loaders/templateLoader.js"
+            },
+            {
+                loader: "@nivinjoseph/n-app/dist/loaders/view-loader.js"
+            },
             {
                 loader: "html-loader",
                 options: {
-                    attrs: ["img:src", "use:xlink:href"]
+                    esModule: false
                 }
             }
         ]
     },
     {
         test: /-view\.html$/,
-        include: [path.resolve(__dirname, "src/server")],
+        include: [Path.resolve(__dirname, "src/server")],
         use: [
             {
                 loader: "html-loader",
                 options: {
-                    attrs: ["img:src", "use:xlink:href"]
+                    esModule: false
                 }
             }
         ]
@@ -233,7 +272,7 @@ const plugins = [
     new webpack.DefinePlugin({
         APP_CONFIG: JSON.stringify({})
     }),
-    new webpack.NormalModuleReplacementPlugin(/element-ui[\/\\]lib[\/\\]locale[\/\\]lang[\/\\]zh-CN/, "element-ui/lib/locale/lang/en"), // for element-ui
+    new webpack.NormalModuleReplacementPlugin(/element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/, "element-ui/lib/locale/lang/en") // for element-ui
 ];
 
 if (isDev)
@@ -244,15 +283,18 @@ if (isDev)
     //     enforce: "pre"
     // });
 
-    plugins.push(new webpack.WatchIgnorePlugin([
-        /\.js$/,
-        /\.d\.ts$/
-    ]));
+    plugins.push(new webpack.WatchIgnorePlugin({
+        paths: [/\.js$/, /\.d\.ts$/]
+    }));
 }
 else
 {
     moduleRules.push({
         test: /\.js$/,
+        include: [
+            Path.resolve(__dirname, "src/client"),
+            Path.resolve(__dirname, "src/sdk")
+        ],
         use: {
             loader: "babel-loader",
             options: {
@@ -283,24 +325,26 @@ module.exports = {
     mode: isDev ? "development" : "production",
     target: "web",
     entry: {
-        main: ["./src/client/client.ts"]
+        main: ["./src/client/client.ts", isDev ? "webpack-hot-middleware/client" : null].where(t => t != null)
     },
     output: {
         filename: "[name].bundle.js",
         chunkFilename: "[name].bundle.js",
-        path: path.resolve(__dirname, "src/client/dist"),
+        path: Path.resolve(__dirname, "src/client/dist"),
         publicPath: "/"
     },
     devtool: isDev ? "source-map" : false,
     optimization: {
+        runtimeChunk: "single",
         splitChunks: {
             chunks: "all"
         },
         minimizer: [
             new TerserPlugin({
+                exclude: /(vendors|\.worker)/,
                 terserOptions: {
-                    keep_classnames: true,
-                    keep_fnames: true,
+                    keep_classnames: false,
+                    keep_fnames: false,
                     safari10: true,
                     mangle: true,
                     output: {
@@ -309,7 +353,7 @@ module.exports = {
                 },
                 extractComments: false
             }),
-            new OptimizeCSSAssetsPlugin({})
+            new CssMinimizerPlugin()
         ]
     },
     module: {
@@ -317,11 +361,16 @@ module.exports = {
     },
     plugins: plugins,
     resolve: {
+        fallback: {
+            "stream": require.resolve("stream-browserify")
+        },
         extensions: [".ts", ".js"],
+        symlinks: false,
         alias: {
             // https://feathericons.com/
             // feather: path.resolve(__dirname, "node_modules/feather-icons/dist/feather-sprite.svg"),
-            vue: isDev ? "@nivinjoseph/vue/dist/vue.js" : "@nivinjoseph/vue/dist/vue.runtime.common.prod.js"
+            vue: isDev ? "@nivinjoseph/vue/dist/vue.js" : "@nivinjoseph/vue/dist/vue.runtime.common.prod.js",
+            "tslib$": "tslib/tslib.es6.js"
         }
     }
 };

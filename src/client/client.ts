@@ -2,7 +2,7 @@ import "@babel/polyfill";
 import "@nivinjoseph/n-ext";
 import "./styles/main.scss";
 import "material-design-icons/iconfont/material-icons.css";
-import { ClientApp, Vue } from "@nivinjoseph/n-app";
+import { ClientApp, DefaultDialogService, Vue } from "@nivinjoseph/n-app";
 import { Routes } from "./pages/routes";
 import { pages } from "./pages/pages";
 import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject";
@@ -37,11 +37,11 @@ class Installer implements ComponentInstaller
 
 const client = new ClientApp("#app", "shell")
     .useInstaller(new Installer())
-    .useAccentColor("#93C5FC")
+    .registerDialogService(new DefaultDialogService({ accentColor: "#93C5FC" }))
     .registerComponents(...components) // registering all your app components
     .registerPages(...pages)  // registering all your app pages
-    .useAsInitialRoute(Routes.paxList)
-    .useAsUnknownRoute(Routes.paxList)
+    .useAsInitialRoute(Routes.listTodos)
+    .useAsUnknownRoute(Routes.listTodos)
     .useHistoryModeRouting();
 
 client.bootstrap();

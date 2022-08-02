@@ -21,10 +21,9 @@ class Installer implements ComponentInstaller
     }
 }
 
-const server = new WebApp(Number.parseInt(ConfigurationManager.getConfig<number>("PORT") as any), null);
+const server = new WebApp(Number.parseInt(ConfigurationManager.getConfig<number>("PORT") as any), null, null, logger);
 server
     .enableWebPackDevMiddleware()
-    .useLogger(logger)
     .useInstaller(new Installer())
     .registerStaticFilePath("src/client/dist", true)
     .registerControllers(IndexController);
