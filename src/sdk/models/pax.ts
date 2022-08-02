@@ -14,5 +14,5 @@ export enum Country
 {
     canada = "Canada",
     usa = "United States",
-    mexico = "Mexico",
+    mexico = "Mexico"
 }

@@ -1,5 +1,4 @@
 import { ComponentViewModel, template, element, bind, events } from "@nivinjoseph/n-app";
-import { given } from "@nivinjoseph/n-defensive";
 import { Pax } from "../../../../../sdk/models/pax";
 import { SelectablePax } from "../../pax-list-view-model";
 import "./pax-table-row-view.scss";
@@ -30,11 +29,5 @@ export class PaxTableRowViewModel extends ComponentViewModel
     public deletePax(): void
     {
         this.emit("deletePax", this.pax);
-    }
-
-
-    protected override onCreate(): void
-    {
-        given(this, "this").ensure(t => t._selectablePax != null, "No pax bound");
     }
 }

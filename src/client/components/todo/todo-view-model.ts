@@ -17,7 +17,7 @@ export class TodoViewModel extends ComponentViewModel
     private readonly _navigationService: NavigationService;
 
 
-    public get todo(): Todo { return this.getBound<Todo>("todo"); } // getting the bound value in the VM.
+    public get todoValue(): Todo { return this.getBound<Todo>("todo"); } // getting the bound value in the VM.
 
 
     public constructor(navigationService: NavigationService)
@@ -33,7 +33,7 @@ export class TodoViewModel extends ComponentViewModel
     {
         try
         {
-            await this.todo.complete();
+            await this.todoValue.complete();
         }
         catch (e)
         {
@@ -43,14 +43,14 @@ export class TodoViewModel extends ComponentViewModel
 
     public editTodo(): void
     {
-        this._navigationService.navigate(Routes.manageTodo, { id: this.todo.id }); // navigating to a different page and, passing a path param to the route. 
+        this._navigationService.navigate(Routes.manageTodo, { id: this.todoValue.id }); // navigating to a different page and, passing a path param to the route. 
     }
 
     public async deleteTodo(): Promise<void>
     {
         try
         {
-            await this.todo.delete();
+            await this.todoValue.delete();
         }
         catch (e)
         {

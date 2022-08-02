@@ -3,6 +3,7 @@ import "@nivinjoseph/n-ext";
 import * as Path from "path";
 const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -268,11 +269,28 @@ const plugins = [
         // favicon: "src/client/images/wrise-squirrel-colored.png",
         hash: true
     }),
+    new HtmlWebpackTagsPlugin({
+        append: false,
+        usePublicPath: false,
+        tags: [
+            "/jquery/jquery.min.js"
+        ]
+    }),
     new MiniCssExtractPlugin({}),
+
     new webpack.DefinePlugin({
         APP_CONFIG: JSON.stringify({})
     }),
-    new webpack.NormalModuleReplacementPlugin(/element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/, "element-ui/lib/locale/lang/en") // for element-ui
+    new webpack.NormalModuleReplacementPlugin(/element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/, "element-ui/lib/locale/lang/en"), // for element-ui
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        ...Object.keys(require("tslib"))
+            .reduce<Record<string, Array<string>>>((acc, key) =>
+            {
+                acc[key] = ["tslib", key];
+                return acc;
+            }, {})
+    })
 ];
 
 if (isDev)
@@ -286,6 +304,8 @@ if (isDev)
     plugins.push(new webpack.WatchIgnorePlugin({
         paths: [/\.js$/, /\.d\.ts$/]
     }));
+
+    plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 else
 {

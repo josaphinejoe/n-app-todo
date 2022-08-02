@@ -21,7 +21,7 @@ export class PaxListViewModel extends PageViewModel
 
 
     private _paxes: ReadonlyArray<SelectablePax> = new Array<SelectablePax>();
-    private _nameFilter: string = "";
+    private _nameFilter = "";
     private _countryFilter: Country | null = null;
 
 
@@ -137,11 +137,11 @@ export class PaxListViewModel extends PageViewModel
     }
 
 
-    protected override onEnter(): void
+    protected override async onEnter(): Promise<void>
     {
         super.onEnter();
 
-        this._loadPaxes().catch();
+        await this._loadPaxes().catch();
     }
 
 

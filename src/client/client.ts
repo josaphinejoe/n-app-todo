@@ -1,4 +1,3 @@
-import "@babel/polyfill";
 import "@nivinjoseph/n-ext";
 import "./styles/main.scss";
 import "material-design-icons/iconfont/material-icons.css";

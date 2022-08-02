@@ -94,7 +94,7 @@ export class ManagePaxViewModel extends PageViewModel
                 country: "" as any,
                 email: "",
                 phoneNumber: null,
-                requiresAssistance: false,
+                requiresAssistance: false
             };
 
             return;
