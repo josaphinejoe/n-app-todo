@@ -1,0 +1,56 @@
+<div class="cart-view">
+    <section class="section has-background-danger-light mt-5">
+                <div class="container is-centered">
+                    <div class="is-centered has-text-centered">
+                        <span class="iconify" data-icon="medical-icon:restaurant" style="color: green;" data-width="200"
+                            data-height="200"></span>
+                    </div>
+                    <h1 class="is-size-1 has-text-centered">
+                    
+                        <span class="has-text-success">EATON</span>
+                    </h1>
+                    <div class="container mt-5 p-5">
+    
+                    <div class="column is-centered mx-6 has-text-centered mt-6 ">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead class="has-background-info-dark ">
+                                <tr>
+                                    <th class="has-text-white">Starter</th>
+                                    <th class="has-text-white">Main Course</th>
+                                    <th class="has-text-white">Desert</th>
+                                    <th class="has-text-white"></th>
+                                </tr>
+                            </thead>
+    
+                            <tbody id="item-list"></tbody>
+                            
+                            <tr v-for="item in items" :key="item.starter">
+                                <td>{{ item.starter }}</td>
+                                <td>{{ item.main }}</td>
+                                <td>{{ item.desert }}</td>
+                                <td><button type="submit" @click="deleteRow(item)"
+                                        class="button is-danger submit">Cancel</button></td>
+                            </tr>
+    
+                        </table>
+                        <div class="container my-6 p-5">
+                        <div class="field has-text-centered">
+                            <div class="control">
+                                
+                                <router-link to="/confirm" class="button is-primary">Place Order</router-link>
+                        
+                            </div>
+                        
+                        </div>
+                        </div>
+                        
+    
+                    </div>
+                    </div>
+    
+                </div>
+                
+                
+            </section> 
+    
+</div>

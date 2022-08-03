@@ -1,0 +1,101 @@
+
+    <div class="menu-view">
+        
+        <section class="section has-background-danger-light mt-5 py-5">
+            <div class="container is-centered ">
+                <div class="is-centered has-text-centered">
+                    <span class="iconify" data-icon="medical-icon:restaurant" style="color: green;" data-width="200"
+                        data-height="200"></span>
+                </div>
+                <h1 class="is-size-1 has-text-centered">
+
+                    <span class="has-text-success">EATON</span>
+                </h1>
+
+                <div class="column is-centered mx-6 formContainer">
+                    <div id="restaurant-form" class="is-centered ">
+                        <div class="field">
+                            <label class="label">Type</label>
+                            <div class="control is-expanded">
+                                <label class="radio">
+                                    <input type="radio" v-model="picked"  name="answer" id="non"
+                                        value="non">
+                                    Non VEG
+                                </label>
+                                <label class="radio">
+                                    <input type="radio"  name="answer" id="veg" value="veg"
+                                        v-model="picked">
+                                    VEG
+                                </label>
+                                <br>
+                                <span>Picked: {{ picked }}</span>
+
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Starter</label>
+                            <div class="control is-expanded">
+                                <div class="select is-primary is-expanded is-fullwidth">
+                                    <select id="starter" v-model="selectedStarter">
+
+                                        <option v-for="option in starters">
+                                            {{ option }}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Main course</label>
+                            <div class="select is-primary is-fullwidth">
+                                <select id="main" v-model="selectedMain">
+
+                                    <option v-for="option in mains">
+                                        {{ option }}
+                                    </option>
+                                </select>
+                                <!-- <span>Selected: {{ selectedMain }}</span> -->
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Desert</label>
+                            <div class="select is-primary is-fullwidth">
+                                <select id="desert" v-model="selectedDesert">
+
+                                    <option v-for="option in deserts">
+                                        {{ option }}
+                                    </option>
+                                </select>
+                                <!-- <span>Selected: {{ selectedDesert }}</span> -->
+                            </div>
+                        </div>
+                        <div class="container my-6">
+                        <div class="field has-text-centered">
+                            <div class="control">
+                                <button type="submit" @click="addItem()" class="button is-primary px-6 submit">ADD
+                                    ITEM</button>
+                                    <router-link to="/cart" class="button is-primary">Go to Cart</router-link>
+
+                            </div>
+
+                        </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="section has-background-danger-light"></section>
+
+
+        
+    </div>
+    

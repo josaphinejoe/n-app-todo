@@ -1,0 +1,70 @@
+<div class="menu-view">
+    <section class="section has-background-danger-light mt-5">
+        <div class="container is-centered">
+            <div class="is-centered has-text-centered">
+                <span class="iconify" data-icon="medical-icon:restaurant" style="color: green;" data-width="200"
+                    data-height="200"></span>
+            </div>
+            <h1 class="is-size-1 has-text-centered">
+    
+                <span class="has-text-success">EATON</span>
+            </h1>
+    
+            <div class="container is-centered my-6 p-5 has-text-centered">
+                <div class="container">
+                    <div class="card py-5">
+                    
+                    
+                        <p>
+                        <h3 class="is-size-5 has-text-centered">Starters</h3>
+                        <ul>
+                            <li v-for="item in items">
+                                {{ item.starter }}
+                            </li>
+                        </ul>
+                        </p>
+                    
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="card py-5">
+                        <p>
+                        <h3 class="is-size-5 has-text-centered">Main Course</h3>
+                        <ul>
+                            <li v-for="item in items">
+                                {{ item.main }}
+                            </li>
+                        </ul>
+                        </p>
+                        <p>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="card py-5">
+                        <h3 class="is-size-5 has-text-centered">Deserts</h3>
+                        <ul>
+                            <li v-for="item in items">
+                                {{ item.desert }}
+                            </li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                
+    
+    
+            </div>
+            <div class="container p-5">
+            <h1 class="is-size-2 has-text-centered">
+            
+                <span class="has-text-danger">Order placed</span>
+            </h1>
+    </div>
+        </div>
+    
+    
+    </section>
+</div>

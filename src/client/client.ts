@@ -1,44 +1,38 @@
 import "@babel/polyfill";
-import "@nivinjoseph/n-ext";
-import "./styles/main.scss";
+import "@nivinjoseph/n-ext"; // JavaScript Type Extension Library.
+import "./styles/main.scss"; // A Main Styling File.
 import * as $ from "jquery";
 (<any>window).jQuery = $; (<any>window).$ = $;
-import "material-design-icons/iconfont/material-icons.css";
-import { ClientApp, Vue } from "@nivinjoseph/n-app";
-import * as Routes from "./pages/routes";
-import { pages } from "./pages/pages";
-import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject";
-import { given } from "@nivinjoseph/n-defensive";
-import { MockTodoService } from "../sdk/services/todo-service/mock-todo-service";
-import { components } from "./components/components";
 
-console.log(Vue);
-
+import { ClientApp } from "@nivinjoseph/n-app"; // Required for setting up the Vue application.
+import * as Routes from "./pages/routes"; // Used to Define Initial Routes and Redirection.
+import { pages } from "./pages/page"; // Import all Pages to Register Them.
+import { components } from "./components/component"; // Import all Components to Register Them.
+import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject"; // Adding Dependency Inversion Library into the Project.
+import { given } from "@nivinjoseph/n-defensive"; // Defensive Check Library.
+import { MenuImplementation } from "../sdk/services/menuService/menuImplementation";
+import { ItemServiceImplementation } from "./services/itemService/itemServiceImplementation";
+// import { MessageServiceImplementation } from "../sdk/services/messageService/messageImplementation";
 
 class Installer implements ComponentInstaller
 {
     public install(registry: Registry): void
     {
         given(registry, "registry").ensureHasValue().ensureIsObject();
+        registry.registerSingleton("MenuService", MenuImplementation);
+        registry.registerSingleton("ItemService", ItemServiceImplementation);
+        
 
-        registry.registerSingleton("TodoService", MockTodoService); // installing dependencies, usually used by VMs
-        // Types of dependencies: 
-        // registerSingleton: Singleton, one instance of the dependency class through out the lifecycle of the app.
-        // registry.registerTransient: Transient, new instance of the dependency class is created when it needs to be injected.
-        // registry.registerScoped: Scoped dependency, same instance is used if it's the same scope, else it it's new instance. 
-        //                          Eg: Page and a component in that page will get the same instance of the dependency, while another page will get a new instance of the dependency.
-        // registry.registerInstance: Instance dependency, similar to singleton, only deference is you provide the instance, and the instance is not created by the framework. 
+        // Here's where you can register your dependencies.
+        // Learn more about our dependency injection library @ https://github.com/nivinjoseph/n-ject.
     }
 }
 
-
 const client = new ClientApp("#app", "shell")
     .useInstaller(new Installer())
-    .useAccentColor("#93C5FC")
-    .registerComponents(...components) // registering all your app components
-    .registerPages(...pages)  // registering all your app pages
-    .useAsInitialRoute(Routes.listTodos)
-    .useAsUnknownRoute(Routes.listTodos)
-    .useHistoryModeRouting();
+    .registerComponents(...components) // Registering all the Components.
+    .registerPages(...pages) // Registering all the Pages.
+    .useAsInitialRoute(Routes.menu) // The initial route to your application.
+    .useAsUnknownRoute(Routes.menu); // When a user goes onto a unknown route, they'll be redirected here.
 
 client.bootstrap();
