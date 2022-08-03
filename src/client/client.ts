@@ -1,7 +1,7 @@
 import "@nivinjoseph/n-ext";
 import "./styles/main.scss";
 import "material-design-icons/iconfont/material-icons.css";
-import { ClientApp, DefaultDialogService, Vue } from "@nivinjoseph/n-app";
+import { ClientApp, DefaultDialogService } from "@nivinjoseph/n-app";
 import { Routes } from "./pages/routes";
 import { pages } from "./pages/pages";
 import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject";
@@ -10,7 +10,7 @@ import { MockTodoService } from "../sdk/services/todo-service/mock-todo-service"
 import { components } from "./components/components";
 import { LocalPaxManagementService } from "../sdk/services/pax-management-service/local-pax-management-service";
 
-console.log(Vue);
+// console.log(Vue);
 
 
 class Installer implements ComponentInstaller
