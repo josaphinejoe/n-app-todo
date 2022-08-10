@@ -1,17 +1,17 @@
-<div>
-<div v-if="selectedTab === 'invoiceTab'">
+<div class="container is-widescreen">
 <div class="invoice-header">
    <h2 class="title">Invoice</h2>
-   <!-- <input type="submit" value="Add item" class="button" @click="selectedTab = 'inputPage'"> -->
-   <button class="button is-link" v-on:click.prevent="addItem">Add Item</button>
+   <router-link to="/inputPage">
+   <button class="button is-primary" v-on:click.prevent="addItem">Add Item</button>
+   </router-link>
 </div>
 
-<!-- <div class="empty-lineItem" v-if="lineItems.length === 0">
+<div class="empty-lineItem" v-if="lineItems.length === 0">
    <h2>Invoice is <span>Empty</span>!!! Add items...</h2>
-</div> -->
+</div>
 
 <div class="item-div">
-   <table class="table">
+   <table class="table is-striped is-fullwidth">
       <thead>
          <tr>
             <th>Item Id</th>
@@ -40,11 +40,9 @@
 
    <div class="view-total">
       <h3>Total Amount: ${{ storeService.currentInvoice.amountWithTax }}</h3>
-     
-      <button class="button is-link" v-on:click.prevent="submitInvoice">Checkout</button>
-      <!-- <input type="submit" value="Checkout" class="button" @click="submitInvoice"> -->
+      <router-link to="/store">
+         <button class="button is-link" v-on:click.prevent="submitInvoice">Checkout</button>
+      </router-link>
    </div>
 </div>
-</div>
-<input-lineItem v-if="selectedTab === 'inputLineItem'"></input-lineItem>
 </div>

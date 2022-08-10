@@ -1,25 +1,25 @@
-<div class="store-management-view">
+<div class="container is-fullwidth">
     <section>
         <div class="hero is-large is-primary">
         <div class="hero-head level">
-            <div class="title is-center">Store Management</div>
+            <div class="title is-1">Store Management</div>
             </div>
         </div> 
-        <div class="content">
-            <div class="navbar-brand">
-                <div class="navbar-item is-active">
+        <div class="columns is grouped">
+            <div class="column is-grey is-one-quarter">
+                <div class="navbar1">
                     <router-link to="/invoicePage">
-                        <p class="title" v-on:click.prevent="createInvoice">Create new invoice</p>
+                        <a class="navbar-item" v-on:click.prevent="createInvoice">Create new invoice</a>
                     </router-link>
-                    <p class="title" v-on:click.prevent="viewTotalSales">View total sales</p>
-                    <p class="title" v-on:click.prevent="viewAllInvoices">View all invoices</p>
+                    <a class="navbar-item" :class="{'is-active':selectedNav === 'viewTotalSales'}" v-on:click.prevent="viewTotalSales">View total sales</a>
+                    <a class="navbar-item" :class="{'is-active':selectedNav === 'viewAllInvoices'}" v-on:click.prevent="viewAllInvoices">View all invoices</a>
                 </div>
             </div>
-            <div class="component">
+            <div class="column">
             <div class="home" v-if="selectedTab === 'homeTab'">
                 <i class="fa-solid fa-shop"></i>
-                <h2>Welcome to</h2>
-                <h2>Store Management App</h2>
+                <h2 class="title">Welcome to</h2>
+                <h2 class="title">Store Management App</h2>
             </div>
             <!-- <newInvoice v-if="selectedTab === 'invoiceTab'"></newInvoice> -->
             

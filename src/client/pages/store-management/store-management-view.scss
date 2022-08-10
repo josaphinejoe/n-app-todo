@@ -1,11 +1,13 @@
-.navbar-item{
+.hero{
+    align-items: center;
+}
+.columns{
+    margin: auto;
+}
+.navbar1{
     display: flex;
     flex-direction: column;
 }
-.navbar-brand{
-    background-color: grey;
-}
-.content{
-    display: flex;
-    flex-direction: row;
+.home{
+   text-align: center;
 }

@@ -1,17 +1,19 @@
-import { ComponentViewModel, element, template} from "@nivinjoseph/n-app";
+import { PageViewModel, template, route, NavigationService} from "@nivinjoseph/n-app";
 import "./input-lineItem-view.scss";
 import { inject } from "@nivinjoseph/n-ject";
 import { given } from "@nivinjoseph/n-defensive";
 import { Validator, strval } from "@nivinjoseph/n-validate";
-import { StoreService } from "../../../../../sdk/services/store-service/store-service";
+import { StoreService } from "../../../sdk/services/store-service/store-service";
+import { Routes } from "../routes";
 
 
 @template(require("./input-lineItem-view.html"))
-@element("inputLineItem")
-@inject("StoreService")
-export class InputLineItemViewModel extends ComponentViewModel
+@route(Routes.inputPage)
+@inject("StoreService", "NavigationService")
+export class InputLineItemViewModel extends PageViewModel
 {
     private readonly _storeService: StoreService;
+    private readonly _navigationService: NavigationService;
     // private _selectedTab: string;
 
 
@@ -34,17 +36,17 @@ export class InputLineItemViewModel extends ComponentViewModel
     public get hasErrors(): boolean { return !this._validate(); }
     public get errors(): Record<string, any> { return this._validator.errors; }
 
-    public constructor(storeService: StoreService)
+    public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
         given(storeService, "storeService").ensureHasValue();
-       
+        given(navigationService, "navigationService").ensureHasValue().ensureIsObject();
 
         this._storeService = storeService;
-        // this._selectedTab = "inputLineItem";
+        this._navigationService = navigationService;
         this._productName = "";
-        this._quantity = 0;
-        this._mrp = 0;
+        this._quantity = this.quantity;
+        this._mrp = this.mrp;
         this._validator =this._createValidator();
     }
 
@@ -57,6 +59,7 @@ export class InputLineItemViewModel extends ComponentViewModel
         try
         {
             this._storeService.currentInvoice.addItem(this._productName, this._quantity, this._mrp);
+            this._navigationService.navigate(Routes.invoicePage);
         }
         catch(e)
         {
@@ -64,10 +67,10 @@ export class InputLineItemViewModel extends ComponentViewModel
         }
     }
     
-    // public cancel(): void
-    // {
-    //     this._selectedTab = "invoiceTab";
-    // }
+    public cancel(): void
+    {
+        this._navigationService.navigate(Routes.invoicePage);
+    }
 
     private _validate(): boolean
     {

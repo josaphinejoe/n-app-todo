@@ -1,3 +1,4 @@
+import { InputLineItemViewModel } from "./input-lineItem/input-lineItem-view-model";
 import { ListTodosViewModel } from "./list-todos/list-todos-view-model";
 import { ManagePaxViewModel } from "./manage-pax/manage-pax-view-model";
 import { ManageTodoViewModel } from "./manage-todo/manage-todo-view-model";
@@ -14,5 +15,6 @@ export const pages: Array<Function> = [
     PaxListViewModel,
     
     StoreManagementViewModel,
-    NewInvoiceViewModel
+    NewInvoiceViewModel,
+    InputLineItemViewModel
 ];
