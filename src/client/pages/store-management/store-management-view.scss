@@ -1,0 +1,11 @@
+.navbar-item{
+    display: flex;
+    flex-direction: column;
+}
+.navbar-brand{
+    background-color: grey;
+}
+.content{
+    display: flex;
+    flex-direction: row;
+}

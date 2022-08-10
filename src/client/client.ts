@@ -7,6 +7,7 @@ import { pages } from "./pages/pages";
 import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject";
 import { given } from "@nivinjoseph/n-defensive";
 import { MockTodoService } from "../sdk/services/todo-service/mock-todo-service";
+import { MockStoreService } from "../sdk/services/store-service/mock-store-service";
 import { components } from "./components/components";
 import { LocalPaxManagementService } from "../sdk/services/pax-management-service/local-pax-management-service";
 
@@ -21,8 +22,8 @@ class Installer implements ComponentInstaller
 
         registry
             .registerSingleton("TodoService", MockTodoService)
-            .registerSingleton("PaxManagementService", LocalPaxManagementService); // installing dependencies, usually used by VMs
-
+            .registerSingleton("PaxManagementService", LocalPaxManagementService) // installing dependencies, usually used by VMs
+            .registerSingleton("StoreService", MockStoreService);
 
         // Types of dependencies: 
         // registerSingleton: Singleton, one instance of the dependency class through out the lifecycle of the app.
@@ -39,8 +40,8 @@ const client = new ClientApp("#app", "shell")
     .registerDialogService(new DefaultDialogService({ accentColor: "#93C5FC" }))
     .registerComponents(...components) // registering all your app components
     .registerPages(...pages)  // registering all your app pages
-    .useAsInitialRoute(Routes.listTodos)
-    .useAsUnknownRoute(Routes.listTodos)
+    .useAsInitialRoute(Routes.store)
+    .useAsUnknownRoute(Routes.store)
     .useHistoryModeRouting();
 
 client.bootstrap();
