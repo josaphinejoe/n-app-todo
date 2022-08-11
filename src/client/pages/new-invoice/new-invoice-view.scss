@@ -3,7 +3,18 @@
     justify-content: space-between;
     margin-top: 10px;
 }
-
+.empty-lineItem{
+    display: flex;
+    justify-content: center;
+    margin-top: 11rem;
+    
+    span{
+        color: red;
+    }
+}
+.icon{
+    color: red;
+}
 .view-total{
     display: flex;
     justify-content: space-between;

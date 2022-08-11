@@ -17,6 +17,7 @@ export class NewInvoiceViewModel extends PageViewModel
     private readonly _storeService: StoreService;
     private readonly _navigationService: NavigationService;
     private readonly _invoice: Array<Invoice>;
+    private _shouldDelete!: boolean;
 
     public get storeService(): StoreService { return this._storeService; }
     public get invoice(): ReadonlyArray<Invoice> { return this._invoice; }
@@ -45,15 +46,16 @@ export class NewInvoiceViewModel extends PageViewModel
             alert('Invoice is empty!!! Add an item.');
             return;   
         }
-        alert('Your total amount is $'+ this.storeService.currentInvoice.amountWithTax +' Thanks for shopping.');
+        alert('Your total amount is $'+ this.storeService.currentInvoice.amountWithTax +'. Thanks for shopping...');
+        this._storeService.submitInvoice();
         this._navigationService.navigate(Routes.store);
     }
     public onDelete(lineItem: LineItem): void
     {
-        if(lineItem.amount === 1)
+        this._shouldDelete = confirm('Are you sure you want to delete ['+ lineItem.productName +'] ?');
+        if(!this._shouldDelete)
             return;
-        
-        return;
+        this._storeService.currentInvoice.removeItem(lineItem);
     }
 
 }

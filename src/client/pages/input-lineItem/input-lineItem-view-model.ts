@@ -14,24 +14,24 @@ export class InputLineItemViewModel extends PageViewModel
 {
     private readonly _storeService: StoreService;
     private readonly _navigationService: NavigationService;
-    // private _selectedTab: string;
 
-
-    private _productName: string;
-    private _quantity: number;
-    private _mrp: number;
+    private _productName = "";
+    private _quantity: number | undefined;
+    private _mrp: number | undefined;
     private readonly _validator: Validator<this>;
     
-    // public get selectedTab(): string { return this._selectedTab; }
-
     public get productName(): string { return this._productName; }
     public set productName(value: string) { this._productName = value; }
 
-    public get quantity(): number { return this._quantity; }
+    public get quantity(): number { return this._quantity!; }
     public set quantity(value: number) { this._quantity = value; }
 
-    public get mrp(): number { return this._mrp; }
-    public set mrp(value: number) { this._mrp = value; }
+    public get mrp(): number { return this._mrp!; }
+    public set mrp(value: number)
+    {
+        this._mrp = value;
+        console.log(typeof this.mrp);
+    }
 
     public get hasErrors(): boolean { return !this._validate(); }
     public get errors(): Record<string, any> { return this._validator.errors; }
@@ -41,12 +41,9 @@ export class InputLineItemViewModel extends PageViewModel
         super();
         given(storeService, "storeService").ensureHasValue();
         given(navigationService, "navigationService").ensureHasValue().ensureIsObject();
-
+       
         this._storeService = storeService;
         this._navigationService = navigationService;
-        this._productName = "";
-        this._quantity = this.quantity;
-        this._mrp = this.mrp;
         this._validator =this._createValidator();
     }
 
@@ -58,7 +55,7 @@ export class InputLineItemViewModel extends PageViewModel
         
         try
         {
-            this._storeService.currentInvoice.addItem(this._productName, this._quantity, this._mrp);
+            this._storeService.currentInvoice.addItem(this._productName, this._quantity!, this._mrp!);
             this._navigationService.navigate(Routes.invoicePage);
         }
         catch(e)

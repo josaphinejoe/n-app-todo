@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import "@nivinjoseph/n-ext";
 import "./styles/main.scss";
 import "material-design-icons/iconfont/material-icons.css";
-import { ClientApp, DefaultDialogService } from "@nivinjoseph/n-app";
+
+import { ClientApp, DefaultDialogService, Vue } from "@nivinjoseph/n-app";
 import { Routes } from "./pages/routes";
 import { pages } from "./pages/pages";
 import { ComponentInstaller, Registry } from "@nivinjoseph/n-ject";
@@ -10,9 +12,19 @@ import { MockTodoService } from "../sdk/services/todo-service/mock-todo-service"
 import { MockStoreService } from "../sdk/services/store-service/mock-store-service";
 import { components } from "./components/components";
 import { LocalPaxManagementService } from "../sdk/services/pax-management-service/local-pax-management-service";
+// Element-UI stuff
+import * as Element from "element-ui"; // https://element.eleme.io/#/en-US/component
+// @ts-expect-error no type def
+import locale from "element-ui/lib/locale/lang/en";
+// import Vue = require("vue/types/umd");
+
+
+
+// import Vue from 'vue';
 
 // console.log(Vue);
 
+Vue.use(Element, { locale });
 
 class Installer implements ComponentInstaller
 {

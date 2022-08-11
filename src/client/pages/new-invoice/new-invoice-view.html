@@ -1,4 +1,4 @@
-<div class="container is-widescreen">
+<div class="container is-fluid is-widescreen">
 <div class="invoice-header">
    <h2 class="title">Invoice</h2>
    <router-link to="/inputPage">
@@ -7,10 +7,10 @@
 </div>
 
 <div class="empty-lineItem" v-if="lineItems.length === 0">
-   <h2>Invoice is <span>Empty</span>!!! Add items...</h2>
+   <h2 class="title is-4">Invoice is <span>Empty</span>!!! Add items...</h2>
 </div>
 
-<div class="item-div">
+<div class="item-div" v-else>
    <table class="table is-striped is-fullwidth">
       <thead>
          <tr>
@@ -21,6 +21,7 @@
             <th>Amount</th>
             <th>Tax</th>
             <th>Total</th>
+            <th>Del</th>
          </tr>
       </thead>
 
@@ -33,16 +34,19 @@
             <td>{{ lineItem.amount }}</td>
             <td>{{ lineItem.tax }}</td>
             <td>{{ lineItem.amountWithTax }}</td>
-            <td><i class="fas fa-trash" @click="onDelete(lineItem)"></i></td>
+            <td><span class="icon"><i class="material-icons" @click="onDelete(lineItem)">delete</i></span></td>
+            <!-- <td><span class="material-symbols-outlined" @click="onDelete(lineItem)">del</span></td> -->
+            <!-- <td><i class="fas fa-trash" @click="onDelete(lineItem)"></i></td> -->
          </tr>
       </tbody>
    </table>
 
+   <div class="box">
    <div class="view-total">
       <h3>Total Amount: ${{ storeService.currentInvoice.amountWithTax }}</h3>
       <router-link to="/store">
          <button class="button is-link" v-on:click.prevent="submitInvoice">Checkout</button>
       </router-link>
-   </div>
+   </div></div>
 </div>
 </div>

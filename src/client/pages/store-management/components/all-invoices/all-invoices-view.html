@@ -1,10 +1,11 @@
 <div class="view-all-invoices">
+    <div class="card">
     <header class="card-header">
         <h2 class="card-header-title">All Invoices</h2>
     </header>
         
         <div class="card-content">
-     <div class="empty-lineItem" v-if="invoices.length === 0"> 
+     <div class="empty-invoice" v-if="invoices.length === 0"> 
         <h2>No invoices added yet!!!</h2>
     </div>
 
@@ -27,5 +28,6 @@
 
      </table>
 
+</div>
 </div>
 </div>
