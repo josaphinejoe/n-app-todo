@@ -12,6 +12,4 @@ export interface StoreService
 
     createInvoice(): void;
     submitInvoice(): void;
-    getAllInvoices(): Array<Invoice>;
-
 }

@@ -5,7 +5,7 @@ import { StoreService } from "./store-service";
 export class MockStoreService implements StoreService
 {
     private readonly _invoices: Array<Invoice> = [];
-    private _currentInvoice: MockInvoiceProxy|null = null;
+    private _currentInvoice: MockInvoiceProxy | null = null;
 
 
     public get invoices(): Array<Invoice> { return this._invoices; }
@@ -19,7 +19,6 @@ export class MockStoreService implements StoreService
     {
         this._currentInvoice = new MockInvoiceProxy();
         console.log('invoice created');
-
     }
 
     public submitInvoice(): void 
@@ -31,12 +30,7 @@ export class MockStoreService implements StoreService
         else
         {
             this._invoices.push(this._currentInvoice!);
-            
+            this._currentInvoice = null;
         }
-    }
-
-    public getAllInvoices(): Array<Invoice> 
-    {
-        return this.invoices;
     }
 }        

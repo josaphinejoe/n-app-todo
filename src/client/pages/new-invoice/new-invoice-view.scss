@@ -1,23 +1,28 @@
-.invoice-header{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-.empty-lineItem{
-    display: flex;
-    justify-content: center;
-    margin-top: 11rem;
-    
-    span{
+.new-invoice-view {
+    .invoice-header {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .empty-lineItem {
+        display: flex;
+        justify-content: center;
+        margin-top: 11rem;
+
+        span {
+            color: red;
+        }
+    }
+
+    .delete-icon {
         color: red;
     }
-}
-.icon{
-    color: red;
-}
-.view-total{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
+
+    .view-total-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
 }

@@ -1,15 +1,20 @@
-.is-center{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.input-title{
-    margin-top: 10px;
-}
-.buttons{
-    margin-top: 30px;
-}
-.button-cancel{
-    margin-left: 15px;
+.input-lineItem-view {
+    .is-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .input-title {
+            margin-top: 10px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+
+            .button-cancel {
+                margin-left: 15px;
+            }
+        }
+    }
 }

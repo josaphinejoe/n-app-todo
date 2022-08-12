@@ -18,18 +18,18 @@ export class InputLineItemViewModel extends PageViewModel
     
 
     private _productName = "";
-    private _quantity: number | undefined;
-    private _mrp: number | undefined;
+    private _quantity: number | null = null;
+    private _mrp: number | null = null;
     
     
     public get productName(): string { return this._productName; }
     public set productName(value: string) { this._productName = value; }
 
-    public get quantity(): number | undefined { return this._quantity; }
-    public set quantity(value: number | undefined ) { this._quantity = value; }
+    public get quantity(): number | null { return this._quantity; }
+    public set quantity(value: number | null ) { this._quantity = value; }
 
-    public get mrp(): number | undefined { return this._mrp; }
-    public set mrp(value: number | undefined){ this._mrp = value; }
+    public get mrp(): number | null { return this._mrp; }
+    public set mrp(value: number | null ){ this._mrp = value; }
 
     public get hasErrors(): boolean { return !this._validate(); }
     public get errors(): Record<string, any> { return this._validator.errors; }
