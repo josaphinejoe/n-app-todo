@@ -1,4 +1,6 @@
-export interface Todo
+import { Sequenced } from "../../services/todo-service/sequenced";
+
+export interface Todo extends Sequenced
 {
     id: string;
     title: string;

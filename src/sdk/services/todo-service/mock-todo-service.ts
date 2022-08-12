@@ -2,11 +2,12 @@ import { TodoService } from "./todo-service";
 import { given } from "@nivinjoseph/n-defensive";
 import { MockTodoProxy } from "../../proxies/todo/mock-todo-proxy";
 import { Todo } from "../../proxies/todo/todo";
+import { SequencedHelper } from "./sequenced";
 
 
 export class MockTodoService implements TodoService
 {
-    private readonly _todos: Array<MockTodoProxy>;
+    private _todos: Array<MockTodoProxy>;
     private _counter: number;
 
 
@@ -16,7 +17,7 @@ export class MockTodoService implements TodoService
         const count = 10;
 
         for (let i = 0; i < count; i++)
-            todos.push(new MockTodoProxy("id" + i, "title" + i, "description" + i));
+            todos.push(new MockTodoProxy("id" + i, "title" + i, i, "description" + i));
 
         this._todos = todos;
         this._counter = count;
@@ -40,8 +41,15 @@ export class MockTodoService implements TodoService
         given(title, "title").ensureHasValue().ensureIsString();
         given(description, "description").ensureIsString();
 
-        const todo = new MockTodoProxy("id" + this._counter++, title.trim(), description);
-        this._todos.push(todo);
+        const todo = new MockTodoProxy("id" + this._counter++, title.trim(), this._todos.length, description);
+        this._todos = SequencedHelper.reSequence([...this._todos, todo]);
         return Promise.resolve(todo);
+    }
+
+    public async changeSequence(id: string, sequence: number): Promise<void>
+    {
+        const item = this._todos.find(t => t.id === id)!;
+        item.updateSequence(sequence);
+        this._todos = SequencedHelper.reSequence(this._todos, item);
     }
 }

@@ -16,7 +16,10 @@ export class ListTodosViewModel extends PageViewModel
     private _todos: ReadonlyArray<Todo>;
 
 
-    public get todos(): ReadonlyArray<Todo> { return this._todos.where(t => !t.isDeleted); } // getters used to reveal VM properties to the template
+    private _currentlyDraggingTodo: Todo | null = null;
+
+
+    public get todos(): ReadonlyArray<Todo> { return this._todos.where(t => !t.isDeleted).orderBy(t => t.sequence); } // getters used to reveal VM properties to the template
 
 
     public constructor(todoService: TodoService) // dependency getting injected
@@ -27,6 +30,46 @@ export class ListTodosViewModel extends PageViewModel
         this._todos = [];
     }
 
+
+    public dragStart(todo: Todo): void
+    {
+        given(todo, "todo").ensureHasValue().ensureIsObject();
+
+        this._currentlyDraggingTodo = todo;
+        console.log("start");
+    }
+
+    public drop(destinationItem: Todo): void
+    {
+        console.log("drop");
+        const item = this._currentlyDraggingTodo!;
+        const sequence = item.sequence;
+        item.updateSequence(destinationItem.sequence);
+        destinationItem.updateSequence(sequence);
+    }
+
+    public dragEnd(): void
+    {
+        this._currentlyDraggingTodo = null;
+    }
+
+    public dragEnter(event: DragEvent): void
+    {
+        const ev = event.target as HTMLElement;
+        if (ev.classList.contains("dropZone"))
+        {
+            ev.classList.add("dragOver");
+        }
+    }
+
+    public dragLeave(event: DragEvent): void
+    {
+        const ev = event.target as HTMLElement;
+        if (ev.classList.contains("dropZone"))
+        {
+            ev.classList.remove("dragOver");
+        }
+    }
 
     /**
      * Life cycle methods for pages, in order of when they are called.

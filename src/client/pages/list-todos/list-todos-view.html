@@ -7,6 +7,11 @@
 
     <div class="todo-container">
         <!-- using the custom component that we built -->
-        <todo v-for="todo in todos" v-bind:key="todo.id" :todo="todo"></todo>
+        <div v-for="todo in todos" draggable="true" @dragstart="dragStart(todo)" @drop="drop(todo)" @dragover.prevent
+            @dragend="dragEnd" @dragenter="dragEnter" class="dropZone" @dragleave="dragLeave">
+            <todo v-bind:key="todo.id" :todo="todo">
+            </todo>
+        </div>
+
     </div>
 </div>

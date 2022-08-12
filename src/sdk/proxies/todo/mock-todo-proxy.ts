@@ -9,6 +9,7 @@ export class MockTodoProxy implements Todo
     private _description: string | null;
     private _isCompleted: boolean;
     private _isDeleted: boolean;
+    private _sequence: number;
 
 
     public get id(): string { return this._id; }
@@ -16,9 +17,10 @@ export class MockTodoProxy implements Todo
     public get description(): string | null { return this._description; }
     public get isCompleted(): boolean { return this._isCompleted; }
     public get isDeleted(): boolean { return this._isDeleted; }
+    public get sequence(): number { return this._sequence; }
 
 
-    public constructor(id: string, title: string, description?: string)
+    public constructor(id: string, title: string, sequence: number, description?: string)
     {
         given(id, "id").ensureHasValue().ensureIsString();
         this._id = id.trim();
@@ -26,11 +28,19 @@ export class MockTodoProxy implements Todo
         given(title, "title").ensureHasValue().ensureIsString();
         this._title = title;
 
+        given(sequence, "sequence").ensureHasValue().ensureIsNumber();
+        this._sequence = sequence;
+
         given(description as string, "description").ensureIsString();
         this._description = description || null;
 
         this._isCompleted = false;
         this._isDeleted = false;
+    }
+
+    public updateSequence(sequence: number): void
+    {
+        this._sequence = sequence;
     }
 
 
