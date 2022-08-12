@@ -12,15 +12,13 @@ import { StoreService } from "../../../../../sdk/services/store-service/store-se
 export class TotalSalesViewModel extends ComponentViewModel
 {
     private readonly _storeService: StoreService;
-    // private _invoices: ReadonlyArray<Invoice>;
-    // private _totalAmount: number;
-    // private _totalTax: number;
-    // private _totalAmountWithTax: number;
+
 
     public get invoicesLength(): number { return this._storeService.invoices.length; }
     public get totalAmount(): number { return this._storeService.totalAmount; }
     public get totalTax(): number { return this._storeService.totalTax; }
     public get totalAmountWithTax(): number { return this._storeService.totalAmountWithTax; }
+    
 
     public constructor(storeService: StoreService)
     {

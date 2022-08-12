@@ -16,13 +16,7 @@ import { LocalPaxManagementService } from "../sdk/services/pax-management-servic
 import * as Element from "element-ui"; // https://element.eleme.io/#/en-US/component
 // @ts-expect-error no type def
 import locale from "element-ui/lib/locale/lang/en";
-// import Vue = require("vue/types/umd");
 
-
-
-// import Vue from 'vue';
-
-// console.log(Vue);
 
 Vue.use(Element, { locale });
 

@@ -9,9 +9,6 @@ export class LineItem
     private readonly _productName: string;
     private readonly _quantity: number;
     private readonly _mrp: number;
-    // private _amount: number;
-    // private _tax: number;
-    // private _amountWithTax: number;
 
     public get itemId(): string { return this._itemId; }
     public get productName(): string { return this._productName; }

@@ -16,13 +16,17 @@ export class NewInvoiceViewModel extends PageViewModel
 {
     private readonly _storeService: StoreService;
     private readonly _navigationService: NavigationService;
-    private readonly _invoice: Array<Invoice>;
+    private readonly _invoice: Array<Invoice> = [];
+    
+    
     private _shouldDelete!: boolean;
 
+    
     public get storeService(): StoreService { return this._storeService; }
     public get invoice(): ReadonlyArray<Invoice> { return this._invoice; }
     public get lineItems(): ReadonlyArray<LineItem> { return this._storeService.currentInvoice.lineItems;  }
 
+    
     public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
@@ -31,11 +35,11 @@ export class NewInvoiceViewModel extends PageViewModel
         
         this._storeService = storeService;
         this._navigationService = navigationService;
-        this._invoice = [];
     }
+    
+    
     public addItem(): void
     {
-        console.log(this._storeService.currentInvoice);
         this._navigationService.navigate(Routes.inputPage);
     }
     
@@ -50,6 +54,7 @@ export class NewInvoiceViewModel extends PageViewModel
         this._storeService.submitInvoice();
         this._navigationService.navigate(Routes.store);
     }
+    
     public onDelete(lineItem: LineItem): void
     {
         this._shouldDelete = confirm('Are you sure you want to delete ['+ lineItem.productName +'] ?');

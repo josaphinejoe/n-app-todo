@@ -14,28 +14,27 @@ export class InputLineItemViewModel extends PageViewModel
 {
     private readonly _storeService: StoreService;
     private readonly _navigationService: NavigationService;
+    private readonly _validator: Validator<this>;
+    
 
     private _productName = "";
     private _quantity: number | undefined;
     private _mrp: number | undefined;
-    private readonly _validator: Validator<this>;
+    
     
     public get productName(): string { return this._productName; }
     public set productName(value: string) { this._productName = value; }
 
-    public get quantity(): number { return this._quantity!; }
-    public set quantity(value: number) { this._quantity = value; }
+    public get quantity(): number | undefined { return this._quantity; }
+    public set quantity(value: number | undefined ) { this._quantity = value; }
 
-    public get mrp(): number { return this._mrp!; }
-    public set mrp(value: number)
-    {
-        this._mrp = value;
-        console.log(typeof this.mrp);
-    }
+    public get mrp(): number | undefined { return this._mrp; }
+    public set mrp(value: number | undefined){ this._mrp = value; }
 
     public get hasErrors(): boolean { return !this._validate(); }
     public get errors(): Record<string, any> { return this._validator.errors; }
 
+    
     public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
@@ -46,6 +45,7 @@ export class InputLineItemViewModel extends PageViewModel
         this._navigationService = navigationService;
         this._validator =this._createValidator();
     }
+    
 
     public async save(): Promise<void>
     {

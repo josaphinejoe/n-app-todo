@@ -39,9 +39,4 @@ export class MockStoreService implements StoreService
     {
         return this.invoices;
     }
-
-    // public clearInvoice(): void 
-    // {
-    //     this._currentInvoice = null;
-    // }
 }        
