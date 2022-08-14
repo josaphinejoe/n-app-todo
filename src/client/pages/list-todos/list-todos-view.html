@@ -6,7 +6,7 @@
     </nav>
 
     <div class="todo-container">
-        <div v-for="todo in todos">
+        <div v-for="(todo,index) in todos">
             <div @drop="drop(todo)" @dragover.prevent @dragenter="dragEnter" class="dropZone mx-2"
                 @dragleave="dragLeave">
             </div>
@@ -14,8 +14,8 @@
                 <todo v-bind:key="todo.id" :todo="todo">
                 </todo>
             </div>
-            <div @drop="drop(todo)" @dragover.prevent @dragenter="dragEnter" class="dropZone mx-2"
-                @dragleave="dragLeave">
+            <div v-if="index >= todos.length-2" @drop="drop(todo)" @dragover.prevent @dragenter="dragEnter"
+                class="dropZone mx-2" @dragleave="dragLeave">
             </div>
         </div>
     </div>
