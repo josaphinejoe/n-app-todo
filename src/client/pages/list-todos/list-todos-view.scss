@@ -14,8 +14,14 @@
         // justify-content: space-evenly;
     }
 
+    .dropZone
+    {
+        min-height: 5vh;
+    }
+
     .dropZone.dragOver
     {
         background-color: purple;
+        height: fit-content;
     }
 }

@@ -6,12 +6,17 @@
     </nav>
 
     <div class="todo-container">
-        <!-- using the custom component that we built -->
-        <div v-for="todo in todos" draggable="true" @dragstart="dragStart(todo)" @drop="drop(todo)" @dragover.prevent
-            @dragend="dragEnd" @dragenter="dragEnter" class="dropZone" @dragleave="dragLeave">
-            <todo v-bind:key="todo.id" :todo="todo">
-            </todo>
+        <div v-for="todo in todos">
+            <div @drop="drop(todo)" @dragover.prevent @dragenter="dragEnter" class="dropZone mx-2"
+                @dragleave="dragLeave">
+            </div>
+            <div draggable="true" @dragstart="dragStart(todo)" @dragend="dragEnd">
+                <todo v-bind:key="todo.id" :todo="todo">
+                </todo>
+            </div>
+            <div @drop="drop(todo)" @dragover.prevent @dragenter="dragEnter" class="dropZone mx-2"
+                @dragleave="dragLeave">
+            </div>
         </div>
-
     </div>
 </div>

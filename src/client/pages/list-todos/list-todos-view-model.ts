@@ -51,6 +51,14 @@ export class ListTodosViewModel extends PageViewModel
     public dragEnd(): void
     {
         this._currentlyDraggingTodo = null;
+
+        const elements = document.getElementsByClassName("dropZone");
+
+        for (const element of elements)
+        {
+            if (element.classList.contains("dragOver"))
+                element.classList.remove("dragOver");
+        }
     }
 
     public dragEnter(event: DragEvent): void
@@ -64,47 +72,26 @@ export class ListTodosViewModel extends PageViewModel
 
     public dragLeave(event: DragEvent): void
     {
+        console.log("leave");
         const ev = event.target as HTMLElement;
+
         if (ev.classList.contains("dropZone"))
         {
             ev.classList.remove("dragOver");
         }
+
     }
 
     /**
      * Life cycle methods for pages, in order of when they are called.
      */
 
-    protected override onCreate(): void
-    {
-        super.onCreate();
-        console.log("on Create, when the Vm is created, but the template has not been mounted in the DOM.");
-    }
-
-    protected override onMount(element: HTMLElement): void
-    {
-        super.onMount(element);
-        console.log("onMount, when the page template is mounted on the DOM, you get the HTML element as a parameter here to manipulate it, like using Jquery for example.");
-    }
 
     protected override onEnter(): void
     {
         super.onEnter();
-        console.log("onEnter, when the page has appeared, usually used to fetch data to show on the page. The parameters for this function would be any query/path params of the url defined in the route");
         this._todoService.getTodos()
             .then(t => this._todos = t)
             .catch(e => console.log(e));
-    }
-
-    protected override onLeave(): void
-    {
-        super.onLeave();
-        console.log("onLeave, when the user is about to leave the page.");
-    }
-
-    protected override onDestroy(): void
-    {
-        super.onDestroy();
-        console.log("onDestroy, when the page is removed from the DOM.");
     }
 }
