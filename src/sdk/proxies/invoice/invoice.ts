@@ -1,10 +1,8 @@
 import { LineItem } from "../../models/lineItem";
 
-
 export interface Invoice 
 {
     lineItems: Array<LineItem>;
-
     invoiceId: string;
     date: number;
 
@@ -14,5 +12,4 @@ export interface Invoice
 
     addItem(productName: string, quantity: number, mrp: number): void;
     removeItem(lineItem: LineItem): void;
-
 }
