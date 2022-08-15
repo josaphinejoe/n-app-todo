@@ -10,9 +10,9 @@
                         <router-link to="/invoicePage">
                             <a class="navbar-item" v-on:click.prevent="createInvoice">Create new invoice</a>
                         </router-link>
-                        <a class="navbar-item" :class="{'is-active':selectedNav === 'viewTotalSales'}"
+                        <a class="navbar-item" :class="{'is-active':selectedTab === 'totalSalesTab'}"
                             v-on:click.prevent="viewTotalSales">View total sales</a>
-                        <a class="navbar-item" :class="{'is-active':selectedNav === 'viewAllInvoices'}"
+                        <a class="navbar-item" :class="{'is-active':selectedTab === 'allInvoicesTab'}"
                             v-on:click.prevent="viewAllInvoices">View all invoices</a>
                     </div>
                 </div>
