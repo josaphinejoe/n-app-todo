@@ -21,7 +21,6 @@ export class StoreManagementViewModel extends PageViewModel
     
     private readonly _invoices: Array<Invoice> = [];
     private _selectedTab = "homeTab";
-    private _selectedNav = "";
     
     
     public get invoices(): Array<Invoice> { return this._invoices; }
@@ -49,12 +48,11 @@ export class StoreManagementViewModel extends PageViewModel
     public viewTotalSales(): void
     {
         this._selectedTab = "totalSalesTab";
-        this._selectedNav = "viewTotalSales";
     }
 
     public viewAllInvoices(): void
     {
         this._selectedTab = "allInvoicesTab";
-        this._selectedNav = "viewAllInvoices";
     }
+    
 }
