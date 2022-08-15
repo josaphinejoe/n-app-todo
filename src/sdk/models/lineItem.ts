@@ -33,4 +33,5 @@ export class LineItem
         this._itemId = "LIN22X" + ++LineItem._count;
     }
 
+
 }
