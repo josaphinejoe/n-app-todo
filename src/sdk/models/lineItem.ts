@@ -8,6 +8,7 @@ export class LineItem
     private readonly _productName: string;
     private readonly _quantity: number;
     private readonly _mrp: number;
+    
 
     public get itemId(): string { return this._itemId; }
     public get productName(): string { return this._productName; }
@@ -16,6 +17,7 @@ export class LineItem
     public get amount(): number { return parseFloat((this.quantity * this.mrp).toFixed(2)); }
     public get tax(): number { return parseFloat((this.amount * 0.18).toFixed(2)); }
     public get amountWithTax(): number { return parseFloat((this.amount + this.tax).toFixed(2));}
+    
 
     public constructor(productName: string, quantity: number, mrp: number)
     {
