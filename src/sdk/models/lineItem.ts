@@ -1,7 +1,6 @@
 import { given } from "@nivinjoseph/n-defensive";
 
 
-
 export class LineItem 
 {
     private static _count = 200;
