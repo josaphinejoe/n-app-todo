@@ -1,0 +1,33 @@
+<div class="store-management-view">
+    <div class="container is-fullhd">
+        <section>
+            <div class="hero is-primary">
+                <div class="title is-1">Store Management</div>
+            </div>
+            <div class="columns">
+                <div class="hero lined">
+                    <div class="navbar1">
+                        <router-link to="/invoicePage">
+                            <a class="navbar-item" v-on:click.prevent="createInvoice">Create new invoice</a>
+                        </router-link>
+                        <a class="navbar-item" :class="{'is-active':selectedTab === 'totalSalesTab'}"
+                            v-on:click.prevent="switchTab('totalSalesTab')">View total sales</a>
+                        <a class="navbar-item" :class="{'is-active':selectedTab === 'allInvoicesTab'}"
+                            v-on:click.prevent="switchTab('allInvoicesTab')">View all invoices</a>
+
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="home" v-if="selectedTab === 'homeTab'">
+                        <i class="fa-solid fa-shop"></i>
+                        <h2 class="title">Welcome to</h2>
+                        <h2 class="title">Store Management App</h2>
+                    </div>
+
+                    <totalSales v-if="selectedTab === 'totalSalesTab'"></totalSales>
+                    <allInvoices v-if="selectedTab === 'allInvoicesTab'"></allInvoices>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

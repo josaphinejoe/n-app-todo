@@ -1,0 +1,54 @@
+<div class="new-invoice-view">
+   <div class="container is-fluid is-widescreen">
+      <div class="invoice-header">
+         <h2 class="title">Invoice</h2>
+         <router-link to="/inputPage">
+            <button class="button is-primary" v-on:click.prevent="addItem">Add Item</button>
+         </router-link>
+      </div>
+
+      <div class="empty-lineItem" v-if="lineItems.length === 0">
+         <h2 class="title is-4">Invoice is <span>Empty</span>!!! Add items...</h2>
+      </div>
+
+      <div class="item-div" v-else>
+         <table class="table is-striped is-fullwidth">
+            <thead>
+               <tr>
+                  <th>Item Id</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>MRP</th>
+                  <th>Amount</th>
+                  <th>Tax</th>
+                  <th>Total</th>
+                  <th>Del</th>
+               </tr>
+            </thead>
+
+            <tbody class="lineItems">
+               <tr v-for="lineItem of lineItems">
+                  <td>{{ lineItem.itemId }}</td>
+                  <td>{{ lineItem.productName }}</td>
+                  <td>{{ lineItem.quantity }}</td>
+                  <td>{{ lineItem.mrp }}</td>
+                  <td>{{ lineItem.amount }}</td>
+                  <td>{{ lineItem.tax }}</td>
+                  <td>{{ lineItem.amountWithTax }}</td>
+                  <td><span class="delete-icon"><i class="material-icons" @click="onDelete(lineItem)">delete</i></span>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+
+         <div class="box">
+            <div class="view-total-container">
+               <h3>Total Amount: ${{ storeService.currentInvoice.amountWithTax }}</h3>
+               <router-link to="/store">
+                  <button class="button is-link" v-on:click.prevent="submitInvoice">Checkout</button>
+               </router-link>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

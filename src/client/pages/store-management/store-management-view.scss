@@ -1,0 +1,27 @@
+.store-management-view 
+{
+    .hero 
+    {
+        align-items: center;
+    }
+    .columns
+    {
+        margin: 1px;
+
+        .navbar1
+        {
+            padding: 10px 24px;
+            padding-left: 24px;
+        }
+        .lined
+        {
+            border-right: 1px solid grey;
+            height: 30rem;
+        }
+        .home
+        {
+            text-align: center;
+            margin-top: 11rem;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<div class="input-lineItem-view">
+  <div class="container is-center is-fluid is-fullwidth">
+    <h2 class="title input-title">Input LineItem</h2>
+
+    <form>
+      <div class="field">
+        <label class="label">Product Name</label>
+        <div class="control">
+          <input class="input" type="text" v-model="productName" placeholder="Product name">
+        </div>
+        <p class="help is-danger">{{errors.productName}}</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Quantity</label>
+        <div class="control">
+          <input class="input" type="number" v-model.number="quantity" placeholder="Quantity">
+        </div>
+        <p class="help is-danger">{{errors.quantity}}</p>
+      </div>
+
+      <div class="field">
+        <label class="label">MRP</label>
+        <div class="control">
+          <input class="input" type="number" v-model.number="mrp" placeholder="MRP">
+        </div>
+        <p class="help is-danger">{{errors.mrp}}</p>
+      </div>
+
+      <div class="field is-grouped buttons">
+        <div class="control">
+          <router-link to="/invoicePage">
+            <button class="button is-primary" v-on:click.prevent="save" v-bind:disabled="hasErrors">Save</button>
+          </router-link>
+        </div>
+        <div class="control button-cancel">
+          <router-link to="/invoicePage">
+            <button class="button is-danger" v-on:click.prevent="cancel">Cancel</button>
+          </router-link>
+        </div>
+      </div>
+
+      <p class="help is-danger" v-show="hasErrors">Please fix all errors</p>
+    </form>
+  </div>
+</div>
