@@ -2,7 +2,6 @@ import { Invoice } from "./invoice";
 import { LineItem } from "../../models/lineItem";
 
 
-
 export class MockInvoiceProxy implements Invoice
 {
     private static _count = 2200;
@@ -17,7 +16,8 @@ export class MockInvoiceProxy implements Invoice
     public get amount(): number { return this.lineItems.reduce((acc, lineItem) => acc + lineItem.amount, 0); }
     public get tax(): number { return this.lineItems.reduce((acc, lineItem) => acc + lineItem.tax, 0); }
     public get amountWithTax(): number { return parseFloat((this.amount + this.tax).toFixed(2)); }
-
+    
+    
     public constructor()
     {
         this._invoiceId = "INV22X" + ++MockInvoiceProxy._count;

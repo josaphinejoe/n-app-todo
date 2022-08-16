@@ -53,10 +53,14 @@ export class StoreManagementViewModel extends PageViewModel
     public viewAllInvoices(): void
     {
         this._selectedTab = "allInvoicesTab";
+<<<<<<< HEAD
     }
     
     public switchTab(currentTab: string): void
     {
         this._selectedTab = currentTab;
+=======
+>>>>>>> ea780940c4f303fd41a0217db19edff47f067efb
     }
+    
 }
