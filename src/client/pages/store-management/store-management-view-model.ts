@@ -20,26 +20,22 @@ export class StoreManagementViewModel extends PageViewModel
     
     
     private readonly _invoices: Array<Invoice> = [];
-    private _selectedTab: string;
-    private _selectedNav: string;
+    private _selectedTab = "homeTab";
     
     
     public get invoices(): Array<Invoice> { return this._invoices; }
     public get selectedTab(): string { return this._selectedTab; }
-    public get selectedNav(): string { return this._selectedNav; }
     
     
     public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
+        
         given(storeService, "storeService").ensureHasValue().ensureIsObject();
         given(navigationService, "navigationService").ensureHasValue().ensureIsObject();
         
         this._storeService = storeService;
         this._navigationService = navigationService;
-   
-        this._selectedTab = "homeTab";
-        this._selectedNav = "";
     }
     
     
@@ -52,12 +48,15 @@ export class StoreManagementViewModel extends PageViewModel
     public viewTotalSales(): void
     {
         this._selectedTab = "totalSalesTab";
-        this._selectedNav = "viewTotalSales";
     }
 
     public viewAllInvoices(): void
     {
         this._selectedTab = "allInvoicesTab";
-        this._selectedNav = "viewAllInvoices";
+    }
+    
+    public switchTab(currentTab: string): void
+    {
+        this._selectedTab = currentTab;
     }
 }

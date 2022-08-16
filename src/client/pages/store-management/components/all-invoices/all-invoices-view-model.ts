@@ -22,6 +22,7 @@ export class AllInvoicesViewModel extends ComponentViewModel
     public constructor(storeService: StoreService)
     {
       super();
+      
       given(storeService, "storeService").ensureHasValue().ensureIsObject();
         
       this._storeService = storeService;

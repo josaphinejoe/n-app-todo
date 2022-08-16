@@ -38,6 +38,7 @@ export class InputLineItemViewModel extends PageViewModel
     public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
+        
         given(storeService, "storeService").ensureHasValue();
         given(navigationService, "navigationService").ensureHasValue().ensureIsObject();
        

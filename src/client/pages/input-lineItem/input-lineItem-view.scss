@@ -1,18 +1,23 @@
-.input-lineItem-view {
-    .is-center {
+.input-lineItem-view 
+{
+    .is-center 
+    {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        .input-title {
+        .input-title 
+        {
             margin-top: 10px;
         }
 
-        .buttons {
+        .buttons 
+        {
             margin-top: 30px;
 
-            .button-cancel {
+            .button-cancel 
+            {
                 margin-left: 15px;
             }
         }

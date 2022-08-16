@@ -19,7 +19,7 @@ export class NewInvoiceViewModel extends PageViewModel
     private readonly _invoice: Array<Invoice> = [];
     
     
-    private _shouldDelete!: boolean;
+    private _shouldDelete = false;
 
     
     public get storeService(): StoreService { return this._storeService; }
@@ -30,6 +30,7 @@ export class NewInvoiceViewModel extends PageViewModel
     public constructor(storeService: StoreService, navigationService: NavigationService)
     {
         super();
+        
         given(storeService, "storeService").ensureHasValue().ensureIsObject();
         given(navigationService, "navigationService").ensureHasValue().ensureIsObject();
         

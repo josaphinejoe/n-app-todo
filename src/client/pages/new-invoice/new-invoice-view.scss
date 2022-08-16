@@ -1,25 +1,31 @@
-.new-invoice-view {
-    .invoice-header {
+.new-invoice-view 
+{
+    .invoice-header 
+    {
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
     }
 
-    .empty-lineItem {
+    .empty-lineItem 
+    {
         display: flex;
         justify-content: center;
         margin-top: 11rem;
 
-        span {
+        span 
+        {
             color: red;
         }
     }
 
-    .delete-icon {
+    .delete-icon 
+    {
         color: red;
     }
 
-    .view-total-container {
+    .view-total-container 
+    {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
