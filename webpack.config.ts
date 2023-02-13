@@ -12,6 +12,8 @@ const CompressionPlugin = require("compression-webpack-plugin");
 import { ConfigurationManager } from "@nivinjoseph/n-config";
 const webpack = require("webpack");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
+import * as Zlib from "zlib";
 
 
 const env = ConfigurationManager.getConfig<string>("env");
@@ -176,7 +178,7 @@ const moduleRules: Array<any> = [
             {
                 loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js",
                 options: {
-                    hmrView: "renderFuncs" // templates | renderFuncs
+                    hmrView: "templates" // templates | renderFuncs
                 }
             },
             tsLoader
@@ -188,7 +190,7 @@ const moduleRules: Array<any> = [
             {
                 loader: "@nivinjoseph/n-app/dist/loaders/view-model-loader.js",
                 options: {
-                    hmrView: "renderFuncs" // templates | renderFuncs
+                    hmrView: "templates" // templates | renderFuncs
                 }
             }
         ]
@@ -267,7 +269,8 @@ const plugins = [
         template: "src/server/controllers/index-view.html",
         filename: "index-view.html",
         // favicon: "src/client/images/wrise-squirrel-colored.png",
-        hash: true
+        hash: true,
+        minify: false
     }),
     new HtmlWebpackTagsPlugin({
         append: false,
@@ -290,7 +293,8 @@ const plugins = [
                 acc[key] = ["tslib", key];
                 return acc;
             }, {})
-    })
+    }),
+    new MomentLocalesPlugin()
 ];
 
 if (isDev)
@@ -335,8 +339,15 @@ else
 
     plugins.push(...[
         new CompressionPlugin({
-            test: /\.(js|css|svg)$/
+            test: /\.(js|css|svg)$/,
+            algorithm: "brotliCompress",
+            compressionOptions: <any>{
+                params: {
+                    [Zlib.constants.BROTLI_PARAM_QUALITY]: Zlib.constants.BROTLI_MAX_QUALITY
+                }
+            }
         })
+        // new BundleAnalyzerPlugin()
     ]);
 }
 

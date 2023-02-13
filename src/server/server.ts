@@ -7,7 +7,7 @@ import { given } from "@nivinjoseph/n-defensive";
 import { IndexController } from "./controllers/index-controller";
 
 
-const logger = new ConsoleLogger(LogDateTimeZone.est);
+const logger = new ConsoleLogger({ logDateTimeZone: LogDateTimeZone.est });
 
 class Installer implements ComponentInstaller
 {

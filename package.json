@@ -46,18 +46,18 @@
         "@babel/core": "^7.18.6",
         "@babel/preset-env": "^7.18.6",
         "@types/mocha": "^9.1.1",
-        "@typescript-eslint/eslint-plugin": "^5.27.0",
-        "@typescript-eslint/parser": "^5.27.0",
+        "@typescript-eslint/eslint-plugin": "^5.30.6",
+        "@typescript-eslint/parser": "^5.30.6",
         "autoprefixer": "^10.4.7",
         "babel-loader": "^8.2.5",
         "btoa": "^1.2.1",
         "clean-webpack-plugin": "^4.0.0",
         "compression-webpack-plugin": "^10.0.0",
-        "concurrently": "^7.2.1",
+        "concurrently": "^7.2.2",
         "css-loader": "^6.7.1",
         "css-minimizer-webpack-plugin": "^4.0.0",
         "enhanced-resolve": "^5.9.3",
-        "eslint": "^8.16.0",
+        "eslint": "^8.19.0",
         "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^7.2.11",
         "hash-sum": "^2.0.0",
@@ -103,28 +103,26 @@
         "worker-loader": "^3.0.8"
     },
     "dependencies": {
-        "@nivinjoseph/n-app": "^4.0.28",
-        "@nivinjoseph/n-config": "^1.0.35",
+        "@nivinjoseph/n-app": "^4.0.36",
+        "@nivinjoseph/n-config": "^1.0.38",
         "@nivinjoseph/n-defensive": "^1.0.41",
         "@nivinjoseph/n-exception": "^1.0.26",
-        "@nivinjoseph/n-ext": "^1.1.35",
-        "@nivinjoseph/n-ject": "^2.0.3",
-        "@nivinjoseph/n-log": "^1.0.18",
-        "@nivinjoseph/n-sec": "^5.0.2",
-        "@nivinjoseph/n-util": "^1.0.79",
-        "@nivinjoseph/n-validate": "^1.0.32",
-        "@nivinjoseph/n-web": "^4.0.2",
-        "@sentry/node": "^6.19.7",
-        "@sentry/tracing": "^6.19.7",
+        "@nivinjoseph/n-ext": "^1.1.36",
+        "@nivinjoseph/n-ject": "^2.0.5",
+        "@nivinjoseph/n-log": "^2.1.12",
+        "@nivinjoseph/n-sec": "^5.0.5",
+        "@nivinjoseph/n-util": "^1.0.81",
+        "@nivinjoseph/n-validate": "^1.0.34",
+        "@nivinjoseph/n-web": "^4.0.15",
         "axios": "^0.27.2",
         "bulma": "^0.9.3",
-        "element-ui": "^2.15.5",
+        "element-ui": "^2.15.12",
         "feather-icons": "^4.28.0",
         "jquery": "^3.6.0",
         "material-design-icons": "^3.0.1",
         "source-map-support": "^0.5.21",
         "stream-browserify": "^3.0.0",
-        "tslib": "^2.4.0"
+        "tslib": "^2.4.1"
     },
     "overrides": {
         "vue": "2.6.14"
@@ -133,7 +131,7 @@
         "defaults"
     ],
     "engines": {
-        "node": "16.x",
+        "node": "18.x",
         "npm": "8.x"
     }
 }
